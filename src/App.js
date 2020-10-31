@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import LoginForm from "./App/LoginForm";
+import { Site } from "./App/site";
 import { ApiErrors, fetchApi } from "./funcs/fetchApi";
+import { Loader } from "./ui/loader";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -13,11 +15,11 @@ function App() {
 
   if(user === null){
     return <div>
-      Loading...
+      <Loader/>
     </div>
   }
   return (
-    user ? <div>Loged in</div> : <LoginForm onConnect={setUser}/>
+    user ? <Site /> : <LoginForm onConnect={setUser}/>
   );
 }
 

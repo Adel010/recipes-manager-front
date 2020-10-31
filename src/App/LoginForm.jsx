@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ApiErrors, fetchApi } from "../funcs/fetchApi";
+import { Loader } from "../ui/loader";
 
 
 
@@ -39,7 +40,7 @@ function LoginForm({onConnect}){
             <input type="text" name="email" id="email" className="form-field" required/>
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" className="form-field" required/>
-            <button type="submit" disabled={loading}>Login</button>
+            <button type="submit" disabled={loading}>{loading ? <Loader size="small" color="black" /> : "Login"}</button>
         </form>
     </div>
 }
