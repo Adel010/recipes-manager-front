@@ -31,7 +31,8 @@ export function useIngredients(){
             }
             try{
                 const ingredients = await fetchApi("ingredients");
-                dispatch({type: "SET_INGREDIENTS", payload : ingredients})
+                console.log("Fetch called");
+                dispatch({type: "SET_INGREDIENTS", payload : ingredients});
             }catch(e){
                 dispatch({type: "SET_INGREDIENTS", payload : "Loading error"});
                 console.error(e);
@@ -39,8 +40,24 @@ export function useIngredients(){
            
         },
         deleteIngredient : async function(ingredient){
-            await fetchApi("ingredients/" + ingredient.id, { method : "GET"});
+            await fetchApi("ingredients/" + ingredient.id, { method : "DELETE"});
             dispatch({type: "DELETE_INGREDIENT", payload: ingredient})
+        },
+        addIngredient : async function(newIngredient){
+            try{
+                await fetchApi("ingredients", {
+                    method : "POST",
+                    body : JSON.stringify(newIngredient),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type" : "application/json"
+                    }
+                });
+                dispatch({type: "ADD_INGREDIENT", payload : newIngredient })
+
+            }catch(err){
+                throw err
+            }
         }
     }
 }

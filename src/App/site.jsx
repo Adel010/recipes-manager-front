@@ -9,11 +9,11 @@ export function Site(){
         setPage(() => selectedPage)
     },[setPage]);
 
-    const { ingredients, fetchIngredients, deleteIngredient} = useIngredients();
+    const { ingredients, fetchIngredients, deleteIngredient, addIngredient} = useIngredients();
 
     let mainContent = null;
     if(page === "ingredients"){
-        mainContent = <Ingredients ingredients={ingredients} onDelete={deleteIngredient}/>
+        mainContent = <Ingredients ingredients={ingredients} onDelete={deleteIngredient} addNewIngredient={addIngredient}/>
     }else if(page === "recipes"){
         mainContent = <Recipes />
     }

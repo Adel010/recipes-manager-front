@@ -2,8 +2,10 @@
  * Un objet représentant les erreurs de l'api
  */
 export class ApiErrors{
-    constructor(errors){
-        this.errors = errors
+    constructor(errors, status){
+        this.errors = errors;
+        this.responsStatus = status;
+        console.log("error fired");
     }
 }
 
@@ -29,7 +31,7 @@ export async function fetchApi(endpoint, options = {}){
         return responsData
     }else{
         if(responsData.errors){
-            throw new ApiErrors(responsData.errors)
+            throw new ApiErrors(responsData.errors, respons.status)
         }
     }
 }

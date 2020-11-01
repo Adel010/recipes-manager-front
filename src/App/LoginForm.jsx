@@ -49,7 +49,7 @@ LoginForm.propTypes = {
 }
 
 function LoginError(props){
-    return <div className="login-error-container">
+    return <div className="error-message">
         <p>{props.children}</p>
     </div>
 }
