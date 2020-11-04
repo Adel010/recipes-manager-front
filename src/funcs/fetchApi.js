@@ -5,7 +5,6 @@ export class ApiErrors{
     constructor(errors, status){
         this.errors = errors;
         this.responsStatus = status;
-        console.log("error fired");
     }
 }
 
