@@ -11,10 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#root{
+  min-height: 100vh;
+  background-color: rgb(190, 255, 255);
+}
 main{
   padding: 1rem;
   background-color: rgb(190, 255, 255);
-  min-height: 100vh;
+  min-height: 100%;
 }
 .form-container{
   display: flex;
@@ -73,6 +77,7 @@ nav{
 .loader-container{
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .lds-roller {
   display: inline-block;
@@ -320,4 +325,52 @@ nav{
 .input-error{
   border: 1px solid rgb(212, 0, 0) !important;
   box-shadow: inset 0px 0px 2px rgb(212,0, 0);
+}
+.recipes-container{
+  display: flex;
+  justify-content: center;
+}
+.recipe-modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  background: rgb(0, 0, 0, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.modal-content{
+  background-color: rgb(0, 136, 136);
+  color: white;
+  padding: 1rem;
+  border: 3px solid #8effff;
+  border-radius: 10px;
+  position: absolute;
+  top: 10vh;
+  max-width: 400px;
+}
+.recipe-card{
+  background-color: #00bbbb;
+  color: white;
+  padding: 1rem;
+  margin: .5rem;
+}
+.recipe-card:hover{
+  box-shadow: -3px 5px 5px rgba(0, 0, 0, .3);
+  transition-duration: 200ms;
+}
+.modal-top{
+  text-align: right;
+  cursor: pointer;
+  width: 2rem;
+  position: absolute;
+  right: 1rem;
+  color: #ff6666;
+  font-weight: bold;
+}
+.edit-recipe-form{
+  display: flex;
+  flex-direction: column;
 }

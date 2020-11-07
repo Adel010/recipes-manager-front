@@ -31,7 +31,6 @@ export function useIngredients(){
             }
             try{
                 const ingredients = await fetchApi("ingredients");
-                console.log("Fetch called");
                 dispatch({type: "SET_INGREDIENTS", payload : ingredients});
             }catch(e){
                 dispatch({type: "SET_INGREDIENTS", payload : "Loading error"});

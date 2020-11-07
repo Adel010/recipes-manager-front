@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useIngredients } from "../hooks/ingredient";
+import { useRecipes } from "../hooks/recipes";
 import { Ingredients } from "./ingredients/ingredients";
 import { Recipes } from "./recipes/recipes";
 
@@ -11,17 +12,21 @@ export function Site(){
 
     const { ingredients, fetchIngredients, deleteIngredient, addIngredient, editIngredient} = useIngredients();
 
+    const { recipes, fetchRecipes, getRecipeDetails, setNewIngredientToRecipe} = useRecipes();
+    console.log(recipes);
     let mainContent = null;
     if(page === "ingredients"){
         mainContent = <Ingredients ingredients={ingredients} onDelete={deleteIngredient} addNewIngredient={addIngredient} onEdit={editIngredient}/>
     }else if(page === "recipes"){
-        mainContent = <Recipes />
+        mainContent = <Recipes recipes={recipes} getRecipeDetails={getRecipeDetails} ingredients={ingredients} fetchIngredients={fetchIngredients} setNewIngredient={setNewIngredientToRecipe} />
     }
     useEffect(function(){
         if(page === "ingredients"){
             fetchIngredients()
+        }else if(page === "recipes"){
+            fetchRecipes()
         }
-    }, [page, fetchIngredients])
+    }, [page, fetchIngredients, fetchRecipes])
     return <>
         <NavBar currentPage={page} selectPage={handlePageChange}/>
         <main>
