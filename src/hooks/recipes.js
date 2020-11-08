@@ -11,6 +11,8 @@ function reducer(state, action){
             return {...state, loading: true}
         case "GET_RECIPE_DETAILS":
             return {...state, loading: false, loaded: [...state.loaded, action.target.id], recipes: state.recipes.map(r => r === action.target ? action.payload : r)}
+        case "ADD_RECIPE":
+            return {...state, loaded: [...state.loaded, action.payload.id], recipes : [...state.recipes, action.payload]}
         
 
 
@@ -54,6 +56,17 @@ export function useRecipes(){
                 throw err
             }
         },
+        addRecipe: async function(recipe){
+            const newRecipe = await fetchApi("recipes", {
+                method : "POST",
+                body : JSON.stringify(recipe),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                }
+            });
+            dispatch({type: "ADD_RECIPE", payload: newRecipe})
+        }
         
     }
 }

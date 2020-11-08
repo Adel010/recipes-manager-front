@@ -51,6 +51,7 @@ nav{
   color: white;
   padding: .25rem 1rem;
   align-items: center;
+  position: relative;
 }
 .nav-list {
   display: flex;
@@ -328,6 +329,9 @@ nav{
 }
 .recipes-container{
   display: flex;
+  flex-wrap: wrap;
+}
+.center{
   justify-content: center;
 }
 .recipe-modal{
@@ -349,13 +353,14 @@ nav{
   border-radius: 10px;
   position: absolute;
   top: 10vh;
-  max-width: 400px;
+  /* max-width: 400px; */
 }
 .recipe-card{
   background-color: #00bbbb;
   color: white;
   padding: 1rem;
   margin: .5rem;
+  width: 250px;
 }
 .recipe-card:hover{
   box-shadow: -3px 5px 5px rgba(0, 0, 0, .3);
@@ -373,4 +378,38 @@ nav{
 .edit-recipe-form{
   display: flex;
   flex-direction: column;
+}
+.recipe-form-container form label{
+  display: flex;
+  flex-direction: column;
+}
+.recipe-form-container form label textarea{
+  min-width: 300px;
+  min-height: 100px;
+}
+.recipe-form-container form .form-col-left{
+  float: left;
+  margin-right: .5rem;
+}
+.recipe-form-container form .form-col-right{
+  float: right;
+  margin-left: .5rem;
+}
+.add-btn-container{
+  flex-grow: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+.add-btn{
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  transition: 50ms;
+  padding: .5rem 1rem;
+}
+.add-btn:hover, .add-btn:focus {
+  background: white;
+  border: 2px solid white;
+  color: #008080;
+  transition: 100ms;
 }
