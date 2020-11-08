@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Loader } from "../../ui/loader";
 
 
-export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, isOpen}){
+export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, editRecipe, isOpen}){
     useEffect(function(){
         if(!ingredints){
             fetchIngredients()
@@ -40,9 +40,12 @@ export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, is
     }
     function handleSubmit(e){
         e.preventDefault();
-        addRecipe(newRecipe);
-        e.targed.reset();
-        isOpen(true)
+        if(isNew){
+            addRecipe(newRecipe);
+            isOpen(false)
+        }else{
+            editRecipe(recipe, newRecipe);
+        }
     }
     const isNew = recipe ? null : true;
     return <div className="recipe-form-container">

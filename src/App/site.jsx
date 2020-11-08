@@ -16,13 +16,12 @@ export function Site(){
 
     const { ingredients, fetchIngredients, deleteIngredient, addIngredient, editIngredient} = useIngredients();
 
-    const { recipes, fetchRecipes, getRecipeDetails, addRecipe} = useRecipes();
-    console.log(recipes);
+    const { recipes, fetchRecipes, getRecipeDetails, addRecipe, editRecipe, deleteRecipe} = useRecipes();
     let mainContent = null;
     if(page === "ingredients"){
         mainContent = <Ingredients ingredients={ingredients} onDelete={deleteIngredient} addNewIngredient={addIngredient} onEdit={editIngredient}/>
     }else if(page === "recipes"){
-        mainContent = <Recipes recipes={recipes} getRecipeDetails={getRecipeDetails} ingredients={ingredients} fetchIngredients={fetchIngredients} addRecipe={addRecipe} />
+        mainContent = <Recipes recipes={recipes} getRecipeDetails={getRecipeDetails} ingredients={ingredients} fetchIngredients={fetchIngredients} addRecipe={addRecipe} editRecipe={editRecipe} deleteRecipe={deleteRecipe} />
     }
     useEffect(function(){
         if(page === "ingredients"){

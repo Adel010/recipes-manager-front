@@ -4,14 +4,14 @@ import { Modal } from "../../ui/Modal";
 import { RecipeForm } from "./RecipeForm";
 
 
-export function Recipes({recipes, getRecipeDetails, ingredients, fetchIngredients}){
+export function Recipes({recipes, getRecipeDetails, ingredients, fetchIngredients, editRecipe, deleteRecipe}){
     return <div className="recipes-container">
-        {recipes ? recipes.map(r =><Recipe key={r.id} recipe={r} getRecipeDetails={getRecipeDetails} ingredients={ingredients} fetchIngredients={fetchIngredients} />) : <div className="center"><Loader /></div>}
+        {recipes ? recipes.map(r =><Recipe key={r.id} recipe={r} getRecipeDetails={getRecipeDetails} ingredients={ingredients} fetchIngredients={fetchIngredients} editRecipe={editRecipe} deleteRecipe={deleteRecipe} />) : <div className="center"><Loader /></div>}
     </div>
 }
 
 
-function Recipe({recipe, getRecipeDetails, ingredients, fetchIngredients}){
+function Recipe({recipe, getRecipeDetails, ingredients, fetchIngredients, editRecipe, deleteRecipe}){
     const [modalOpen, setModalOpen] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
     const handleClick = async function(e){
@@ -31,17 +31,17 @@ function Recipe({recipe, getRecipeDetails, ingredients, fetchIngredients}){
         <h3>{recipe.title}</h3>
         <p>{recipe.short}</p>
         <div><button onClick={handleClick} className="btn standard-btn" >Details</button></div>
-        {modalOpen && <RecipeDetail loadingData={loadingData} recipe={recipe} ingredients={ingredients} modalOpener={setModalOpen} fetchIngredients={fetchIngredients} />}
+        {modalOpen && <RecipeDetail loadingData={loadingData} recipe={recipe} ingredients={ingredients} modalOpener={setModalOpen} fetchIngredients={fetchIngredients} editRecipe={editRecipe} deleteRecipe={deleteRecipe} />}
         
     </div>
 }
 
-function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadingData }){
+function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadingData, editRecipe, deleteRecipe }){
     const [editing, setEditing] = useState(false);
     const regex = /\n/gi;
 
     return <Modal isOpen={modalOpener}>
-        {editing ? <EditRecipeForm fetchIngredients={fetchIngredients} ingredients={ingredients} recipe={recipe} /> :
+        {editing ? <EditRecipeForm fetchIngredients={fetchIngredients} ingredients={ingredients} recipe={recipe} editRecipe={editRecipe} /> :
             <>
             <h3>{recipe.title}</h3>
             <p>{recipe.short}</p>
@@ -55,17 +55,18 @@ function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadi
                         </li>)}
                     </ul>
                     <p dangerouslySetInnerHTML={{__html: recipe.content.replace(regex, "<br/>")}}></p>
-                    <div className="edit-button-container"><button className="btn standard-btn" onClick={() => setEditing(true)}>Edit</button></div>
+                    <div className="edit-button-container">
+                        <button className="btn standard-btn" onClick={() => setEditing(true)}>Edit</button>
+                        <button className="btn danger-btn" onClick={() => deleteRecipe(recipe)}>DELETE</button>
+                    </div>
                 </>
             }
         </>}
     </Modal>
 }
 
-function EditRecipeForm({recipe, ingredients, fetchIngredients}){
-    
-
+function EditRecipeForm({recipe, ingredients, fetchIngredients, editRecipe}){
     return <>
-        <RecipeForm ingredints={ingredients} recipe={recipe} fetchIngredients={fetchIngredients}/>
+        <RecipeForm ingredints={ingredients} recipe={recipe} fetchIngredients={fetchIngredients} editRecipe={editRecipe}/>
     </>
 }

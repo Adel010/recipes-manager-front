@@ -13,6 +13,10 @@ function reducer(state, action){
             return {...state, loading: false, loaded: [...state.loaded, action.target.id], recipes: state.recipes.map(r => r === action.target ? action.payload : r)}
         case "ADD_RECIPE":
             return {...state, loaded: [...state.loaded, action.payload.id], recipes : [...state.recipes, action.payload]}
+        case "EDIT_RECIPE":
+            return {...state, recipes: state.recipes.map(r => r.id === action.target.id ? action.payload : r)}
+        case "DELETE_RECIPE":
+            return {...state, recipes: state.recipes.filter(r => r.id !== action.target.id)}
         
 
 
@@ -66,6 +70,21 @@ export function useRecipes(){
                 }
             });
             dispatch({type: "ADD_RECIPE", payload: newRecipe})
+        },
+        editRecipe: async function(targetedRecipe, newData){
+            const editedRecipe = await fetchApi("recipes/" + targetedRecipe.id, {
+                method: "PUT",
+                headers:{
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(newData)
+            });
+            dispatch({type: "EDIT_RECIPE", target: targetedRecipe, payload: editedRecipe});
+        },
+        deleteRecipe: async function(targetedRecipe){
+            await fetchApi("recipes/" + targetedRecipe.id, {method: "DELETE"});
+            dispatch({type: "DELETE_RECIPE", target: targetedRecipe})
         }
         
     }
