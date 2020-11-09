@@ -14,6 +14,7 @@ export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, ed
         content: recipe? recipe.content : "",
         ingredients: recipe? recipe.ingredients : []
     });
+    const [loading, setLoading] = useState(false);
     const fetchedIngredients = ingredints;
     const filtredIngredients = (fetchedIngredients || []).filter(ing => {
         return !newRecipe.ingredients.some(i => i.id === ing.id)
@@ -38,14 +39,16 @@ export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, ed
     function handleContentChange(e){
         setNewRecipe(r => ({...r, content : e.target.value}))
     }
-    function handleSubmit(e){
+    async function handleSubmit(e){
+        setLoading(true);
         e.preventDefault();
         if(isNew){
             addRecipe(newRecipe);
-            isOpen(false)
+            isOpen(false);
         }else{
-            editRecipe(recipe, newRecipe);
+            await editRecipe(recipe, newRecipe);
         }
+        setLoading(false)
     }
     const isNew = recipe ? null : true;
     return <div className="recipe-form-container">
@@ -61,7 +64,7 @@ export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, ed
                 <label>
                     Steps<textarea name="content" value={newRecipe.content} onChange={handleContentChange} required/>
                 </label>
-                <button type="submit" className="btn standard-btn">SAVE</button>
+                <button type="submit" className="btn standard-btn">{loading ? <Loader color="white" size="small" /> : "SAVE"}</button>
             </div>
             <div className="form-col-right">
                 <h3>Ingredients</h3>

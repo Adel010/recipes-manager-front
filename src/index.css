@@ -29,6 +29,14 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: -3px 5px 5px rgba(0, 0, 0, .3);
+  padding: 1rem 5rem;
+  background-color: #008080;
+  color: white;
+  margin-top: 2rem;
+}
+.login-form input{
+  height: 2rem;
 }
 .error-message{
   padding: 0;
@@ -284,8 +292,10 @@ nav{
   background-color: rgb(156, 212, 212);
   transition-duration: 100ms;
 }
-.ingredients-list .btn-groupe{
+.ingredients-list .btn-groupe, .btn-groupe{
   height: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 .add-ingredient-form input {
   margin: .5rem;
@@ -294,10 +304,12 @@ nav{
   border: none;
   border: 1px solid #008080;
 }
+
 .add-ingredient-form input:focus{
   outline: none;
   box-shadow: inset 0px 0px 2px #008080;
 }
+
 .add-ingredient-form {
   height: 2rem;
 }
@@ -353,7 +365,11 @@ nav{
   border-radius: 10px;
   position: absolute;
   top: 10vh;
-  /* max-width: 400px; */
+  min-width: 300px;
+}
+.sub-modal{
+  top: 15vh;
+  min-width: 250px;
 }
 .recipe-card{
   background-color: #00bbbb;
@@ -412,4 +428,14 @@ nav{
   border: 2px solid white;
   color: #008080;
   transition: 100ms;
+}
+.confirm-modal{
+  text-align: center;
+}
+input {
+  border: 1px solid #008080;
+}
+input:focus{
+  outline: none;
+  box-shadow: inset 0px 0px 2px #008080,0px 0px 2px #008080;
 }

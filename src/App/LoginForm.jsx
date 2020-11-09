@@ -33,9 +33,9 @@ function LoginForm({onConnect}){
     }
 
     return <div className="form-container">
-        <h2>Login</h2>
         {error && <LoginError>{error}</LoginError>}
         <form onSubmit={handleSubmit} className="login-form">
+            <h2>Login</h2>
             <label htmlFor="username">User name</label>
             <input type="text" name="email" id="email" className="form-field" required/>
             <label htmlFor="password">Password</label>

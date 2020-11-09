@@ -39,6 +39,11 @@ function Recipe({recipe, getRecipeDetails, ingredients, fetchIngredients, editRe
 function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadingData, editRecipe, deleteRecipe }){
     const [editing, setEditing] = useState(false);
     const regex = /\n/gi;
+    const [delConfirmOpen, setDelConfirmOpen] = useState(null);
+
+    function handleDelClick(){
+        setDelConfirmOpen(true)
+    }
 
     return <Modal isOpen={modalOpener}>
         {editing ? <EditRecipeForm fetchIngredients={fetchIngredients} ingredients={ingredients} recipe={recipe} editRecipe={editRecipe} /> :
@@ -57,8 +62,17 @@ function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadi
                     <p dangerouslySetInnerHTML={{__html: recipe.content.replace(regex, "<br/>")}}></p>
                     <div className="edit-button-container">
                         <button className="btn standard-btn" onClick={() => setEditing(true)}>Edit</button>
-                        <button className="btn danger-btn" onClick={() => deleteRecipe(recipe)}>DELETE</button>
+                        <button className="btn danger-btn" onClick={handleDelClick}>DELETE</button>
                     </div>
+                    {delConfirmOpen && <Modal isOpen={setDelConfirmOpen} className="sub-modal">
+                        <div className="confirm-modal">
+                            <h3>Delete {recipe.title} ?</h3>
+                            <div className="btn-groupe">
+                                <button className="btn danger-btn" onClick={()=> deleteRecipe(recipe)}>CONFIRM</button>
+                                <button className="btn standard-btn" onClick={()=> setDelConfirmOpen(false)}>CANCEL</button>
+                            </div>
+                        </div>
+                    </Modal>}
                 </>
             }
         </>}
