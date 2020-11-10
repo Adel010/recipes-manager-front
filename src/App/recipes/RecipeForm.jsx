@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Loader } from "../../ui/loader";
 
 
-export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, editRecipe, isOpen}){
+export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, editRecipe, isOpen, setEditing}){
     useEffect(function(){
         if(!ingredints){
             fetchIngredients()
@@ -47,6 +47,7 @@ export function RecipeForm ({recipe, ingredints, fetchIngredients, addRecipe, ed
             isOpen(false);
         }else{
             await editRecipe(recipe, newRecipe);
+            setEditing(false)
         }
         setLoading(false)
     }

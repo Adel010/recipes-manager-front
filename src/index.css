@@ -13,11 +13,11 @@ code {
 }
 #root{
   min-height: 100vh;
-  background-color: rgb(190, 255, 255);
+  background-color: rgb(217, 255, 255);
 }
 main{
   padding: 1rem;
-  background-color: rgb(190, 255, 255);
+  background-color: rgb(217, 255, 255);
   min-height: 100%;
 }
 .form-container{

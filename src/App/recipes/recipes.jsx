@@ -46,7 +46,7 @@ function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadi
     }
 
     return <Modal isOpen={modalOpener}>
-        {editing ? <EditRecipeForm fetchIngredients={fetchIngredients} ingredients={ingredients} recipe={recipe} editRecipe={editRecipe} /> :
+        {editing ? <EditRecipeForm fetchIngredients={fetchIngredients} ingredients={ingredients} recipe={recipe} editRecipe={editRecipe} setEditing={setEditing} /> :
             <>
             <h3>{recipe.title}</h3>
             <p>{recipe.short}</p>
@@ -79,8 +79,8 @@ function RecipeDetail({recipe, modalOpener, ingredients, fetchIngredients, loadi
     </Modal>
 }
 
-function EditRecipeForm({recipe, ingredients, fetchIngredients, editRecipe}){
+function EditRecipeForm({recipe, ingredients, fetchIngredients, editRecipe, setEditing}){
     return <>
-        <RecipeForm ingredints={ingredients} recipe={recipe} fetchIngredients={fetchIngredients} editRecipe={editRecipe}/>
+        <RecipeForm ingredints={ingredients} recipe={recipe} fetchIngredients={fetchIngredients} editRecipe={editRecipe} setEditing={setEditing}/>
     </>
 }
